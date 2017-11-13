@@ -6,17 +6,17 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-    	$author = "%" . Input::get('author') . "%" ;
-		$category = "%" . Input::get('category') . "%";
+    	$author = "%" . $request->input('author') . "%" ;
+		$category = "%" . $request->input('category') . "%";
 		
 		$keywords = [
     		['author', 'LIKE' , $author],
     		['category', 'LIKE', $category],
 		];
 
-		return DB::table('Book')->where($keywords)->get();
+		return \DB::table('Book')->where($keywords)->get();
     }
 
     public function show(Book $Book)
